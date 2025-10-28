@@ -373,7 +373,7 @@ function EZMobMonsterParser._validateAbilityTargetDistance(aP)
         end
     elseif EZMobConfig.validations.monster.targetsForRangeCheck[aP.target:lower()] then
         local _,flatRange = regex.Match(aP.distance, cfgVals.flatRangeCheck)
-        if flatRange == nil then
+        if flatRange ~= nil then
             aI.targetType = "all"
             aI.range = tonumber(flatRange)
             aI.numTargets = 1
@@ -385,7 +385,7 @@ function EZMobMonsterParser._validateAbilityTargetDistance(aP)
                 aI.numTargets = "1"
                 aI.radius = tonumber(cubeMatch.radius)
                 aI.range = tonumber(cubeMatch.range)
-                writeDebug("DISTANCETARGET:: 6 aI.range=[%s]", aI.range)
+                writeDebug("DISTANCETARGET:: 6 aI.range=[%s], aI.radius=[%s]", aI.range, aI.radius)
             else
                 local lineMatch = regex.MatchGroups(aP.distance, cfgVals.lineMatchCheck)
                 if lineMatch ~= nil then
