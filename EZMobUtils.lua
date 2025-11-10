@@ -193,6 +193,7 @@ function EZMobUtils.sanitizeString(s)
         ["%E2%80%A6"] = "...",-- ellipsis
         ["%C2%AD"]    = "-",  -- soft hyphen
         ["%C2%A0"]    = " ",  -- non-breaking space
+        ["%C3%97"]    = "by", -- stylized x
 
         -- MCDM Symbols
         ["%E2%9C%A6"] = "#diamond#",    -- Diamond

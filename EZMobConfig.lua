@@ -38,7 +38,7 @@ EZMobConfig.regex.monster.legacy = {
         ability = {
             name = "(?i)^(?<name>[^<]+)\\s*\\((?<action>action|main action|triggered action|maneuver|free action|free triggered action|villain action 1|villain action 2|villain action 3)\\).*?(?<signature>signature)?((?<vp>[0-9]+) (vp|malice))?$",
             roll = "(?i)^.*(?<roll>2d10\\s*[+-]\\s*[0-9]+).*$",
-            rrAttribute = "(?i)make?s?\\s+an?\\s+(?<stat>Might|MGT|M|Agility|AGI|A|Reason|REA|R|Intuition|INU|I|Presence|PRS|P)\\s+test",
+            rrAttribute = "(?i)makes?\\s+an?\\s+(?<stat>Might|Agility|Reason|Intuition|Presence|MGT|AGI|REA|INU|PRS|M|A|R|I|P)\\s+test", --"(?i)make?s?\\s+an?\\s+(?<stat>Might|MGT|M|Agility|AGI|A|Reason|REA|R|Intuition|INU|I|Presence|PRS|P)\\s+test",
             body = {
                 keywords = "(?i)^keywords:?\\s+(?<description>.*)$",
                 distanceTarget = "(?i)^distance:?\\s+(?<distance>(?:(?!\\s*target).)*?)\\s*(?:target:?\\s+(?<target>.*))?$",
@@ -126,7 +126,7 @@ EZMobConfig.regex.monster.validations = {
     meleeOrRangedMatch = "(?i)^Melee (?<melee>[0-9]+) or Ranged? (?<ranged>[0-9]+)",
     flatRangeCheck = "(?i)^\\s*(\\d+)\\s*$",
     cubeRangeCheck = "(?i)(?<radius>\\d+)\\s+cube within (?<range>\\d+)( squares?)?",
-    lineMatchCheck = "(?i)(?<length>\\d+)\\s*x\\s*(?<width>\\d+)\\s*line within (?<range>\\d+)( squares?)?",
+    lineMatchCheck = "(?i)(?<length>\\d+)\\s*by\\s*(?<width>\\d+)\\s*line within (?<range>\\d+)( squares?)?",
     burstMatchCheck = "(?i)(?<radius>\\d+)\\s*burst",
 }
 

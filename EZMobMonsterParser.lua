@@ -103,6 +103,7 @@ function EZMobMonsterParser._extractRRAttribute(text)
     if not text or #text == 0 then return nil end
 
     local match = regex.MatchGroups(text, EZMobConfig.regex.monster.legacy.body.ability.rrAttribute)
+    writeDebug("RESISTROLL:: EXTRACT:: %s %s", text, json(match))
     if not match or not match.stat then return nil end
 
     local rawStat = match.stat:lower()
@@ -388,6 +389,7 @@ function EZMobMonsterParser._validateAbilityTargetDistance(aP)
                 writeDebug("DISTANCETARGET:: 6 aI.range=[%s], aI.radius=[%s]", aI.range, aI.radius)
             else
                 local lineMatch = regex.MatchGroups(aP.distance, cfgVals.lineMatchCheck)
+                print("LINEMATCH:: %s, %s", aP.distance, json(lineMatch))
                 if lineMatch ~= nil then
                     if tonumber(lineMatch.range) ~= 1 then
                         writeLog("!!!! Do not currently support line abilities with range other than 1.", EZMobUtils.STATUS.WARN)
