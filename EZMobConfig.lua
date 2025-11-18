@@ -147,6 +147,7 @@ EZMobConfig.validations = {
             ["all enemies in the cube"] = true,
             ["all enemies"] = true,
             ["each ally"] = true,
+            ["each creature in the area"] = true,
             ["each creature or object in the area"] = true,
             ["each creature"] = true,
             ["each enemy and object in each area"] = true,
