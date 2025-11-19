@@ -117,6 +117,7 @@ function EZMobMonsterImporter:_createBestiaryEntry()
 
     local m = be.properties
     local im = self.monster
+    writeDebug("IMPORTING:: SOURCE:: %s", json(im))
 
     m.name = im.name
     m.groupid = im.groupid
@@ -142,7 +143,7 @@ function EZMobMonsterImporter:_createBestiaryEntry()
     m.innateActivatedAbilities = self:_importAbilities()
     m.import = self:_importSource()
 
-    writeDebug("IMPORTING:: %s", json(m))
+    writeDebug("IMPORTING:: COMPLETE:: %s", json(m))
 
     writeLog(string.format("Create bestiary entry for [%s] complete.", self.monster.name), EZMobUtils.STATUS.INFO, -1)
     return true

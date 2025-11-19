@@ -242,12 +242,12 @@ function EZMobMonsterParserRetail:_parseImmunityWeaknessLine()
     -- Line 5 is immunities & weaknesses
     local sLine = self:_getLine(5)
     local match = regex.MatchGroups(sLine, EZMobConfig.regex.monster.retail.header.immunityWeakness)
-    writeDebug("RETAILPARSER IMMUNITYWEAKNESS line [%s]", sLine)
-    print("RETAILPARSER", json(match))
+    writeDebug("RETAILPARSER:: IMMUNITYWEAKNESS:: LINE:: [%s]", sLine)
+    print("RETAILPARSER:: IMMUNITYWEAKNESS:: RESULT::", json(match))
     if match then
-        writeDebug("RETAILPARSER I [%s] W [%s]", match.immunities, match.weaknesses)
-        self._parseImmunities(match.immunities, 1)
-        self._parseImmunities(match.weaknesses, -1)
+        writeDebug("RETAILPARSER:: IMMUNITYWEAKNESS:: I [%s] W [%s]", match.immunities, match.weaknesses)
+        self:_parseImmunities(match.immunities, 1)
+        self:_parseImmunities(match.weaknesses, -1)
     end
 
 end

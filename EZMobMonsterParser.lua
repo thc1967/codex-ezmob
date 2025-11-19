@@ -196,10 +196,12 @@ end
 --- @param raw string Comma-separated values like "acid 2, fire 3"
 --- @param multiplier number Value multiplier (e.g., 1 for immunity, -1 for weakness)
 function EZMobMonsterParser:_parseImmunities(raw, multiplier)
-    if not raw or raw == "" or #tostring(raw) < 3 then return end
+    writeDebug("RETAILPARSER:: IMMUNITYWEAKNESS:: PARSEIMMUNITIES:: [%s]", raw)
+    if not raw or raw == "" or #raw < 3 then return end
 
     for entry in raw:gmatch("[^,]+") do
         local t, v = entry:match("^%s*(%a+)%s+(%-?%d+)%s*$")
+        writeDebug("RETAILPARSER:: IMMUNITYWEAKNESS:: ITEM:: %s [%s]=>[%s]", entry, t, v)
         if t and v then
             local damageType = "all"
             local keywords = nil
