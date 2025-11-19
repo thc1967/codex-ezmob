@@ -71,6 +71,7 @@ function EZMobMonsterImporter:Import()
     writeLog(string.format("Monster import for [%s] starting.", self.monster.name), EZMobUtils.STATUS.INFO, 1)
 
     self:_validateFolder()
+    self:_setMonsterGroup()
     if self:_createBestiaryEntry() then
         writeLog(string.format("Importing monster [%s] into folder [%s].", self.monster.name, self.monster.folderName or "(root)"), EZMobUtils.STATUS.IMPL)
         import:ImportMonster(self.bestiaryEntry)
@@ -118,6 +119,7 @@ function EZMobMonsterImporter:_createBestiaryEntry()
     local im = self.monster
 
     m.name = im.name
+    m.groupid = im.groupid
     m.reach = nil
     m.monster_category = next(im.keywords) or "Monster"
     m.monster_type = im.name
@@ -233,6 +235,19 @@ function EZMobMonsterImporter:_importSource()
         type = "mcdm",
         data = self.source,
     }
+end
+
+--- Determines the appropriate monster group from the folder name
+function EZMobMonsterImporter:_setMonsterGroup()
+    local folderName = self.monster.folderName or ""
+    if #folderName == 0 then return end
+    writeDebug("SETMONSTERGROUP:: [%s]", folderName)
+
+    local monsterGroup = import:GetExistingItem(MonsterGroup.tableName, folderName)
+    if monsterGroup then
+        writeDebug("SETMONSTERGROUP:: SETTING:: [%s] [%s]", monsterGroup.name, monsterGroup.id)
+        self.monster.groupid = monsterGroup.id
+    end
 end
 
 --- Determines the appropriate folder for the monster and ensures it exists.

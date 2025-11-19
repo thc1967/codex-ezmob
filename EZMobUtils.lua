@@ -9,7 +9,7 @@
 --- and should be imported wherever shared utility logic is needed.
 
 local EZMOB_VERBOSE = false
-local EZMOB_DEBUG = true
+local EZMOB_DEBUG = false
 
 --- @class EZMobUtils
 EZMobUtils = RegisterGameType("EZMobUtils")
