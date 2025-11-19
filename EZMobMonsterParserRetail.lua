@@ -37,26 +37,34 @@ end
 
 --- Parses the content of a monster ability block, starting from the current line.
 --- Handles optional roll syntax, ability detail lines, features, and embedded roll table entries.
---- @param a table The ability object being populated.
+--- @param am table The ability object being populated.
 function EZMobMonsterParserRetail:_parseAbility(am)
     writeLog(string.format("Parse Ability [%s] starting.", am.name), EZMobUtils.STATUS.INFO, 1)
 
     local function calcAction()
-        if am.villainAction and tonumber(am.villainAction) > 0 then return "Villain Action" end
+        -- if am.villainAction and tonumber(am.villainAction) > 0 then return "Villain Action " .. am.villainAction end
         return "Main Action"
     end
 
     local function calcCategorization()
         writeDebug("CATEGORIZATION:: [%s]\n%s", am.name, json(am))
         if am.malice and tonumber(am.malice) > 0 then return "Heroic Ablity" end
-        if am.villainAction and tonumber(am.villainAction) > 0 then return "Heroic Ability" end
+        if am.villainAction and tonumber(am.villainAction) > 0 then return "Villain Action" end
         return "Signature Ability"
+    end
+
+    local function calcVillainAction()
+        if am.villainAction and tonumber(am.villainAction) > 0 then
+            return "Villain Action " .. am.villainAction
+        end
+        return nil
     end
 
     local a = {
         name = am.name:trim(),
         action = calcAction(),
         categorization = calcCategorization(),
+        villainAction = calcVillainAction(),
         signature = #(am.signature or "") > 0,
         cost = tonumber(am.malice) or 0,
         target = "1 creature or object",

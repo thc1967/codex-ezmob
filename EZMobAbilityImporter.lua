@@ -36,7 +36,7 @@ end
 --- @private
 --- @return boolean result `true` if the action string starts with "villain action", `false` otherwise.
 function EZMobAbilityImporter:_isVillainAction()
-    return string.starts_with((self.parsed.action or ""):lower(), "villain action")
+    return self.parsed.villainAction ~= nil and #self.parsed.villainAction > 0
 end
 
 --- Sets cost and resource-related properties on the imported ability.
@@ -55,14 +55,23 @@ function EZMobAbilityImporter:_importCosts()
     if actionResourceId then self.import.actionResourceId = actionResourceId end
 
     if self:_isVillainAction() then
-        self.import.villainAction = self.parsed.action
+        writeDebug("VILLAINACTION:: %s %s", self.parsed.action, json(self.parsed))
+        self.import.villainAction = self.parsed.villainAction
         self.import.usageLimitOptions = {
             charges = "1",
             multicharge = false,
             resourceRefreshType = "encounter",
             resourceid = dmhub.GenerateGuid(),
         }
-        self.parsed.action = "Action"
+        self.parsed.action = "action"
+        local resourcesTable = dmhub.GetTable(CharacterResource.tableName)
+        for k,item in pairs(resourcesTable) do
+            if string.starts_with(self.parsed.action, string.lower(item.name)) then
+                self.import.actionResourceId = k
+                writeDebug("VILLAINACTION:: ACTIONRESOURCEID:: %s", k)
+                break
+            end
+        end
     end
 
 end
