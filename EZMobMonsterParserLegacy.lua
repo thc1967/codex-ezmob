@@ -334,10 +334,13 @@ function EZMobMonsterParserLegacy:_parseStaminaImmunityLine()
     end
     if not self.isImportable then return false end
 
+    writeDebug("IMMUNITYWEAKNESS:: SOURCE:: %s", sLine)
+
     match = regex.MatchGroups(sLine, EZMobConfig.regex.monster.legacy.header.immunities)
     if match then self:_parseImmunities(match.immunity, 1) end
 
     match = regex.MatchGroups(sLine, EZMobConfig.regex.monster.legacy.header.weaknesses)
+    writeDebug("IMMUNITYWEAKNESS:: MATCH:: %s", json(match))
     if match then self:_parseImmunities(match.weakness, -1) end
 
     return self.isImportable
